@@ -3,3 +3,11 @@
   text-align: center;
   font-weight: 600;
 }
+
+.owed {
+    background-color: #FF8080;
+
+}
+.owes {
+    background-color: #99FF99;
+}
