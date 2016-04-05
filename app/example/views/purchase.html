@@ -1,0 +1,39 @@
+<div class="padding" ng-controller="AddPurchaseController">
+    <div class="list">
+        <label class="item item-input">
+            <span class="input-label">Item</span>
+            <input type="text" placeholder="What did you buy?">
+        </label>
+        <label class="item item-input">
+            <span class="input-label">Price</span>
+            <input type="text" placeholder="How much was it?">
+        </label>
+        <label class="item item-input">
+            <span class="input-label"># People</span>
+            <input type="text" placeholder="How many people are you sharing it with?">
+        </label>
+
+        <label class="item item-input item-select">
+            <div class="input-label">
+                Purchaser
+            </div>
+            <select>
+                <option selected>Me</option>
+                <option>James</option>
+                <option>Danqi</option>
+            </select>
+        </label>
+
+    </div>
+    <div class="list list-people"> <!-- List of people to split this bill with -->
+    </div>
+
+    <button class="button button-full button-positive addPerson" ng-click="addPersonTextbox()">
+        Add a Person to Split this with
+    </button>
+
+    <button class="button button-full button-balanced addPerson" ng-click="addPersonTextbox()">
+        SquareUp!
+    </button>
+
+</div>
