@@ -2,22 +2,22 @@
     <div class="list">
         <label class="item item-input">
             <span class="input-label">Item</span>
-            <input type="text" placeholder="What did you buy?">
+            <input type="text" placeholder="What did you buy?" ng-model="data.itemName">
         </label>
         <label class="item item-input">
             <span class="input-label">Price</span>
-            <input type="text" placeholder="How much was it?">
+            <input type="text" placeholder="How much was it?" ng-model="data.price">
         </label>
         <label class="item item-input">
             <span class="input-label"># People</span>
-            <input type="text" placeholder="How many people are you sharing it with?">
+            <input type="text" placeholder="How many people are you sharing it with?" ng-model="data.numPeople">
         </label>
 
         <label class="item item-input item-select">
             <div class="input-label">
                 Purchaser
             </div>
-            <select>
+            <select ng-model="data.ownerID">
                 <option selected>Me</option>
                 <option>James</option>
                 <option>Danqi</option>
