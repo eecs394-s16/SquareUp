@@ -1,39 +1,34 @@
-<div class="padding">
+<div class="padding" ng-controller="PurchasesViewController" ng-init="doRefresh()">
 
-  <super-navbar>
+    <super-refresher
+    pulling-text="Pull to refresh..."
+    on-refresh="doRefresh()">
+    </super-refresher>
+    <super-navbar>
     <super-navbar-title>
-        Purchases
+    Purchases
     </super-navbar-title>
-  </super-navbar>
+    </super-navbar>
 
-  <super-navigate view-id="add-purchase">
-      <button class="button button-block button-positive icon-left super-plus-round">Add a Purchase</button>
-  </super-navigate>
+    <super-navigate view-id="add-purchase">
+    <button class="button button-block button-positive icon-left super-plus-round">Add a Purchase</button>
+    </super-navigate>
 
-  <div class="list card">
+    <div class="list card" ng-repeat="purchase in purchases">
 
-  <a href="#" class="item item-thumbnail-left">
-    <img src="/james.png">
-    <b>$100</b> for <b>comcast</b> by <b>James</b> <span class="badge badge-assertive">3</span>
-  </a>
-
-  <a href="#" class="item item-thumbnail-left">
-    <img src="/danqi.png">
-    <b>$15</b> for <b>toilet paper</b> by <b>Danqi</b> <span class="badge badge-assertive">2</span>
-  </a> 
-
-  <a href="#" class="item item-thumbnail-left">
-    <img src="/connor.png">
-    <b>$750</b> for <b>rent</b> by <b>Connor</b> <span class="badge badge-assertive">4</span>
-  </a>
-
-  <a href="#" class="item item-thumbnail-left">
-    <img src="/Jason.png">
-    <b>$50</b> for <b>soccer</b> by <b>Jason</b> <span class="badge badge-assertive">10</span>
-  </a>
-  
-
-
-</div>
-
+            <div class="item item-divider row">
+                <div class="col-50"><b>{{purchase.ownerID}}</b></div>
+                <div class="col-25 right-align">
+                    <span class="positive"> &nbsp; {{purchase.splitAmong}} &nbsp; </span>
+                </div>
+                <div class="col-25 right-align">
+                    <span class="negative">&nbsp;  0&nbsp;  </span>
+                </div>
+            </div>
+            <div class="item item-thumbnail-left item-text-wrap">
+                <img src="/{{purchase.ownerID}}.png">
+                <b>${{purchase.price}}</b> for <b>{{purchase.itemName}}</b>
+            </div>
+    </div>
+    <button class="button icon super-refresh col-offset-40" ng-click="doRefresh()"></button>
 </div>

@@ -8,6 +8,7 @@
             <span class="input-label">Price</span>
             <input type="text" placeholder="How much was it?" ng-model="data.price">
         </label>
+
         <label class="item item-input">
             <span class="input-label"># People</span>
             <input type="text" placeholder="How many people are you sharing it with?" ng-model="data.numPeople">
@@ -28,9 +29,11 @@
     <div class="list list-people"> <!-- List of people to split this bill with -->
     </div>
 
+    <!--
     <button class="button button-full button-positive addPerson" ng-click="addPerson()">
         Add a Person to Split this with
     </button>
+    -->
 
     <button class="button button-full button-balanced addPerson" ng-click="squareUp()">
         SquareUp!

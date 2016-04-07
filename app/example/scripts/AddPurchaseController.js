@@ -1,32 +1,31 @@
 angular
     .module('example')
-/*
-    .factory('Purchases', ['$firebaseArray', function($firebaseArray) {
-        return $firebaseArray(new Firebase('https://squareup-split.firebaseio.com/purchases'));
-    }])*/
-
     .controller('AddPurchaseController', ['$scope', 'supersonic', function($scope, supersonic) {
         $scope.navbarTitle = "Add a Purchase";
         $scope.squareUp = function() {
             supersonic.logger.log("clicked squareUp.");
 
             var PurchasesRef = new Firebase('https://squareup-split.firebaseio.com/purchases');
+
+            // TODO: Sanity check for input fields to make sure every field is filled in.
             var purchase = {
                 ownerID: $scope.data.ownerID,
                 itemName: $scope.data.itemName,
                 price: $scope.data.price,
+                splitAmong: $scope.data.numPeople,
+                numPaid: 0,
+                numNotPaid: $scope.data.numPeople, 
+                // TODO: need a way to see how many people purchased this by counting the number of item-select class div
             };
+
             supersonic.logger.log("about to push.");
             supersonic.logger.log(purchase);
 
-
-            var newPurchaseRef = PurchasesRef.push().set(purchase);
+            var newPurchaseRef = PurchasesRef.push(purchase);
             supersonic.logger.log(newPurchaseRef);
             supersonic.logger.log("done pushing.");
 
-
-
-
+                /// Needs to be bound as a callback to push().set
             var options = {
               message: "Your friends received your bill!",
               buttonLabel: "Ok"

@@ -11,3 +11,15 @@
 .owes {
     background-color: #99FF99;
 }
+
+.right-align {
+    text-align: right;
+}
+
+.positive {
+    background-color: #FF8080;
+}
+
+.negative {
+    background-color: #99FF99;
+}
