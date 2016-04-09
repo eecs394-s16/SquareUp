@@ -9,6 +9,7 @@ angular
 
             // TODO: Sanity check for input fields to make sure every field is filled in.
             var purchase = {
+                createdAt: Date.now(),
                 ownerID: $scope.data.ownerID,
                 itemName: $scope.data.itemName,
                 price: $scope.data.price,
