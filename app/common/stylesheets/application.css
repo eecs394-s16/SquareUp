@@ -12,6 +12,18 @@
     background-color: #99FF99;
 }
 
+.currencyinput {
+    border: 1px;
+    white-space: nowrap;
+}
+
+.currencyinput input {
+    border: 0;
+}
+
+.input-label {
+    display:inline;
+} 
 .right-align {
     text-align: right;
 }
