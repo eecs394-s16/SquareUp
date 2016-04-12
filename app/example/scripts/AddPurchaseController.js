@@ -2,7 +2,7 @@ angular
     .module('example')
     .controller('AddPurchaseController', ['$scope', 'supersonic', function($scope, supersonic) {
         $scope.navbarTitle = "Add a Purchase";
-
+	$scope.people = [];
         $scope.validateInput = function() {
             if (!(new Sanitize($scope.data.itemName, String).validate())) {
                 return false;
@@ -29,6 +29,7 @@ angular
                 var PurchasesRef = new Firebase('https://squareup-split.firebaseio.com/purchases');
 
                 // TODO: Sanity check for input fields to make sure every field is filled in.
+
                 var purchase = {
                     createdAt: Date.now(),
                     ownerID: $scope.data.ownerID,
@@ -36,7 +37,8 @@ angular
                     price: $scope.data.price,
                     splitAmong: $scope.data.numPeople,
                     numPaid: 0,
-                    numNotPaid: $scope.data.numPeople, 
+                    numNotPaid: $scope.data.numPeople,
+		    people: $scope.people
                     // TODO: need a way to see how many people purchased this by counting the number of item-select class div
                 };
 
@@ -55,8 +57,18 @@ angular
         }
 
         $scope.addPerson = function() {
+	    $scope.people.push({personName:""});
+	    for (var person in $scope.people){
+		supersonic.logger.log(person.personName);
+	    }
+
+	    supersonic.logger.log($scope.people.length);
+
+	    $scope.$apply();
+	    /*
             var myEl = angular.element( document.querySelector( '.list-people' ) );
             myEl.append('<label class="item item-input"><span class="input-label">Share With:</span><input type="text" placeholder="Who are you sharing it with?"></label>');
+*/
         }
     }]);
 
