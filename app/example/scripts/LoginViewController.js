@@ -10,37 +10,35 @@ angular
         var ref = new Firebase('https://squareup-split.firebaseio.com/users');
         return $firebaseAuth(ref);
     }
+
+    $scope.login = function(authData) {
+        var userRef = new Firebase('https://squareup-split.firebaseio.com/users');
+        userRef.push(authData);
+        window.localStorage.setItem('userData', JSON.stringify(authData));
+        $scope.moveOn();
+    }
+
+    $scope.loginGoogle = function() {
+        var ref = new Firebase('https://squareup-split.firebaseio.com');
+        supersonic.logger.log("login with Google");
+        ref.authWithOAuthPopup("google", function(err, authData) {
+            if (error) {
+                supersonic.logger.log("test");
+            } else {
+                supersonic.logger.log("Authenticated successfully with payload:", authData);
+                $scope.login(authData);
+            }
+        });
+    }
     $scope.loginFB = function() {
         supersonic.bind($scope, 'userData'); // bind userData in superscope
         var ref = new Firebase('https://squareup-split.firebaseio.com');
-        var userRef = new Firebase('https://squareup-split.firebaseio.com/users');
         ref.authWithOAuthPopup("facebook", function(err, authData) {
             if (err) {
                 supersonic.logger.log("login failed! with err" + err);
             } else {
-                supersonic.logger.log("Authenticated successfully !!");
-                $scope.userData = authData;
-                userRef.push(authData);
-                window.localStorage.setItem('userData', JSON.stringify(authData));
-                $scope.moveOn();
+                $scope.login(authData);
             }
-        });
-    }
-    $scope.login = function() {
-        var Auth = new Firebase('https://squareup-split.firebaseio.com/users');
-        Auth.authWithPassword({
-            username: $scope.data.username,
-            password: $scope.data.password
-        }).then(function(authData) {
-            $scope.moveOn();
-        }).catch(function(error) {
-            var options = {
-                message: err,
-                buttonLabel: "Ok"
-            };
-            supersonic.ui.dialog.alert("Failed to Login", options).then(function() {
-                supersonic.logger.log("Alert closed.");
-            });
         });
     }
     $scope.signup = function() {
