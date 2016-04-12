@@ -1,6 +1,6 @@
 angular
     .module('example')
-    .controller('PurchasesViewController', ['$scope', 'supersonic', function($scope, supersonic) {
+    .controller('ProfileViewController', ['$scope', 'supersonic', function($scope, supersonic) {
         // Refreshes the page and grabs new purchase data from firebase
         $scope.purchases = [];//empty array 
         $scope.doRefresh = function() {
