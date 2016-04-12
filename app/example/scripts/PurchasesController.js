@@ -15,9 +15,5 @@ angular
         }
         $scope.doRefresh();
         $scope.$apply();
-
         // Gonna call it once -- prob need to move it out to ng-init
     }]);
-
-
-

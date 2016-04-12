@@ -1,18 +1,14 @@
-<div class="padding" ng-controller="ProfileController" ng-init="doRefresh()">
-    <div class="list card">
-        <div class="item item-avatar">
-            <h2>{{userData.facebook.displayName}}</h2>
-        </div>
-        <div class="item item-image">
+<div class="padding" ng-controller="ProfileViewController" ng-init="doRefresh()">
+
+    <super-navbar>
+    <super-navbar-title>
+    Your Profile
+    </super-navbar-title>
+    </super-navbar>
+    <div class="list">
+        <a class="item item-thumbnail-left" href="#">
             <img src="{{userData.facebook.profileImageURL}}">
-        </div>
-
-        <a class="item item-icon-left assertive" href="#">
-            <i class="icon super-music-note"></i>
-            Start listening
+            <h2>{{userData.facebook.displayName}}</h2>
         </a>
-
     </div>
-
-    <button class="button icon super-refresh col-offset-40" ng-click="doRefresh()"></button>
 </div>
