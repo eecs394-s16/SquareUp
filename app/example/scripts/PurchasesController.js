@@ -4,6 +4,7 @@ angular
         // Refreshes the page and grabs new purchase data from firebase
         $scope.purchases = [];//empty array 
         $scope.doRefresh = function() {
+            $scope.purchases = [];//empty array 
             $scope.userData = JSON.parse(window.localStorage.getItem('userData'));
             supersonic.logger.log("Refresh Called.");
             var PurchasesRef = new Firebase('https://squareup-split.firebaseio.com/purchases');
@@ -12,6 +13,7 @@ angular
                 var purchase = snapshot.val();
                 $scope.purchases.push(purchase); //refresh would retrieve all the data
             });
+            supersonic.logger.log($scope.purchases);
         }
         $scope.doRefresh();
         $scope.$apply();
