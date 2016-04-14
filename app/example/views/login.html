@@ -1,0 +1,19 @@
+<div class="padding" ng-controller="LoginViewController">
+    <div class="list">
+        <label class="item item-input">
+            <span class="input-label">Username</span>
+            <input type="text" ng-model="data.username">
+        </label>
+        <label class="item item-input">
+            <span class="input-label">Password</span>
+            <input type="password" ng-model="data.password">
+        </label>
+        <button class="button button-block button-positive" ng-click="loginFB()">
+            Login with Facebook
+        </button>
+
+        <super-navigate location="example#signup">
+        <button class="button button-block button-balanced icon-left">Sign Up</button>
+        </super-navigate>
+    </div>
+</div>
