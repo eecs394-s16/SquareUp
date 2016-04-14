@@ -32,60 +32,64 @@ angular
 	    if (!validate($scope.data.itemName,String)){
 		return false;
             } else if (!validate($scope.data.price,Number)){
-            return false;
-        } // TODO: add sanitization on people name once that's there
-        else {
-            return true;
-        }
-    };
+                return false;
+            } // TODO: add sanitization on people name once that's there
+	    else {
+		return true;
+	    }
+	};
 
-<<<<<<< HEAD
-    $scope.squareUp = function() {
-        if (!$scope.validateInput()) {
-            var options = {
-                message: "One (or more) of your input is invalid!",
-                buttonLabel: "Ok",
-            };
-            supersonic.ui.dialog.alert("ERROR", options).then(function() {
-                supersonic.logger.log("Alert closed.");
-            });
-            return;
-        } else {
-            supersonic.logger.log("Valid Input.");
-            var PurchasesRef = new Firebase('https://squareup-split.firebaseio.com/purchases');
-            // TODO: Sanity check for input fields to make sure every field is filled in.
+        $scope.squareUp = function() {
 
-            var purchase = {
-                createdAt: Date.now(),
-                ownerID: $scope.data.ownerID,
-                itemName: $scope.data.itemName,
-                price: $scope.data.price,
-                splitAmong: $scope.data.numPeople,
-                numPaid: 0,
-                numNotPaid: $scope.data.numPeople,
-		people: $scope.people
-                // TODO: need a way to see how many people purchased this by counting the number of item-select class div
-            };
+            if (!$scope.validateInput()) {
+                var options = {
+                    message: "One (or more) of your input is invalid!",
+                    buttonLabel: "Ok",
+                };
+                supersonic.ui.dialog.alert("ERROR", options).then(function() {
+                    supersonic.logger.log("Alert closed.");
+                });
+                return;
+            } else {
+                supersonic.logger.log("Valid Input.");
+                var PurchasesRef = new Firebase('https://squareup-split.firebaseio.com/purchases');
 
-            var newPurchaseRef = PurchasesRef.push(purchase);
+                // TODO: Sanity check for input fields to make sure every field is filled in.
+		var ppl = {};
+		$scope.people.forEach(function(person){
+		    ppl[person.personName] = true;
+		});
+                var purchase = {
+                    createdAt: Date.now(),
+                    ownerID: $scope.data.ownerID,
+                    itemName: $scope.data.itemName,
+                    price: $scope.data.price,
+                    splitAmong: $scope.data.numPeople,
+                    numPaid: 0,
+                    numNotPaid: $scope.data.numPeople,
+		    people: ppl
+                    // TODO: need a way to see how many people purchased this by counting the number of item-select class div
+                };
 
-            /// Needs to be bound as a callback to push().set
-            var options = {
-                message: "Your friends received your bill!",
-                buttonLabel: "Ok"
-            };
+		var newPurchaseRef = PurchasesRef.push(purchase);
 
-            supersonic.ui.dialog.alert("Squared it up!", options).then(function() {
-                supersonic.logger.log("Alert closed.");
-            });
-	    supersonic.ui.layers.pop();
+		/// Needs to be bound as a callback to push().set
+		var options = {
+                    message: "Your friends received your bill!",
+                    buttonLabel: "Ok"
+		};
+
+		supersonic.ui.dialog.alert("Squared it up!", options).then(function() {
+                    supersonic.logger.log("Alert closed.");
+		});
+		supersonic.ui.layers.pop();
+	    }
 	}
-    }
         $scope.addPerson = function() {
 	    $scope.people.push({personName:""});
-	    for (var person in $scope.people){
+	    $scope.people.foreach(function(person){
 		supersonic.logger.log(person.personName);
-	    }
+	    });
 
 	    supersonic.logger.log($scope.people.length);
 
