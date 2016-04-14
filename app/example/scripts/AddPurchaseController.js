@@ -2,17 +2,40 @@ angular
     .module('example')
     .controller('AddPurchaseController', ['$scope', 'supersonic', function($scope, supersonic) {
         $scope.navbarTitle = "Add a Purchase";
+	var isFloat = function(n) {
+            return parseFloat(n.match(/^-?\d*(\.\d+)?$/))>0;
+	};
+	var validateXSS = function(str){
+            // some basic xss tags to prevent
+            // will add more later
+            var xssCodes = ['&amp;', '&lt;', '&gt;', '&quot;', '&#x27;', '&#x2f;', '<script>', '\'', '\"'];
+            
+            for (var i = 0; i < xssCodes.length; i++) {
+		if (str.indexOf(xssCodes[i]) !== -1) {
+                    return false;
+		}
+            }
+            return true;
+	};
+	var validate = function(input,type){
+	    switch(type){
+	    case String:
+		return validateXSS(input);
+	    case Number:
+		return isFloat(input);
+	    }
+	};
 
         $scope.validateInput = function() {
-            if (!(new Sanitize($scope.data.itemName, String).validate())) {
-                return false;
-            } else if (!(new Sanitize($scope.data.price, Number).validate())) {
+	    if (!validate($scope.data.itemName,String)){
+		return false;
+            } else if (!validate($scope.data.price,Number)){
                 return false;
             } // TODO: add sanitization on people name once that's there
-            else {
-                return true;
-            }
-        };
+	    else {
+		return true;
+	    }
+	};
 
         $scope.squareUp = function() {
             if (!$scope.validateInput()) {
