@@ -13,7 +13,6 @@ angular
                 var purchase = snapshot.val();
                 $scope.purchases.push(purchase); //refresh would retrieve all the data
             });
-            supersonic.logger.log($scope.purchases);
         }
         $scope.doRefresh();
         $scope.$apply();
