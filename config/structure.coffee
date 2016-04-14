@@ -37,6 +37,10 @@ module.exports =
         id: "add-purchase"
         location: "example#purchase"
     }
+    {
+         id: "purchase-detail"
+         location: "example#purchase-detail"
+    }
   ]
 
   # drawers:

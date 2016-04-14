@@ -13,14 +13,19 @@
     <super-navigate view-id="add-purchase">
     <button class="button button-block button-positive icon-left super-plus-round">Add a Purchase</button>
     </super-navigate>
-    <div class="list card" ng-repeat="purchase in purchases | orderBy:'-createdAt'" ng-init="purchases=[]"> 
+
+    <div class="list card" ng-repeat="(key,purchase) in purchases | orderBy:'-createdAt'"> 
         <!-- order by createdAt so the newest purchase comes first -->
+
+	<super-navigate location="example#purchase-detail?key=">
             <div class="item item-divider row">
                 <div class="col-50"><b>{{purchase.ownerID}}</b></div>
                 <div class="col-25 right-align">
+		    unpaid:
                     <span class="positive"> &nbsp; {{purchase.splitAmong}} &nbsp; </span>
                 </div>
                 <div class="col-25 right-align">
+	             paid:
                     <span class="negative">&nbsp;  0&nbsp;  </span>
                 </div>
             </div>
@@ -28,6 +33,7 @@
                 <img src="/{{purchase.ownerID}}.png">
                 <b>${{purchase.price}}</b> for <b>{{purchase.itemName}}</b>
             </a>
+	</super-navigate>
     </div>
     <button class="button icon super-refresh col-offset-40" ng-click="doRefresh()"></button>
 </div>
