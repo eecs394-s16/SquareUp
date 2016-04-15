@@ -1,0 +1,14 @@
+<div class="padding" ng-controller="ProfileViewController" ng-init="doRefresh()">
+
+    <super-navbar>
+    <super-navbar-title>
+    Your Profile
+    </super-navbar-title>
+    </super-navbar>
+    <div class="list">
+        <a class="item item-thumbnail-left" href="#">
+            <img src="{{userData.facebook.profileImageURL}}">
+            <h2>{{userData.facebook.displayName}}</h2>
+        </a>
+    </div>
+</div>
