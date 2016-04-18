@@ -1,13 +1,16 @@
 <div class="padding" ng-controller="LoginViewController">
     <div class="list">
         <label class="item item-input">
-            <span class="input-label">Username</span>
-            <input type="text" ng-model="data.username">
+            <span class="input-label">Email</span>
+            <input type="email" ng-model="data.email">
         </label>
         <label class="item item-input">
             <span class="input-label">Password</span>
             <input type="password" ng-model="data.password">
         </label>
+	
+	<button class="button button-block button-positive" ng-click="emailLogin()">Login</button>
+	
         <button class="button button-block button-positive" ng-click="loginFB()">
             Login with Facebook
         </button>
