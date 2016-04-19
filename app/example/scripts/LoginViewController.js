@@ -75,6 +75,18 @@ angular
 		supersonic.ui.dialog.alert("Error creating user",options);
 	    } else {
 		supersonic.ui.dialog.alert("New user created!");
+		
+		var user_data = {
+		    username: data.username,
+		    email: data.email,
+                    purchases: null,
+                    friends: null
+		}
+
+		var ref = new Firebase("https://squareup-split.firebaseio.com/profiles/"+ uobj.uid);
+		supersonic.logger.log("uobj.uid: " + uobj.uid);
+		ref.set(user_data);
+
 		supersonic.ui.layers.pop();
 	    }
 	});
