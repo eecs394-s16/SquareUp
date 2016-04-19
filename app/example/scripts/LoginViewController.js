@@ -41,29 +41,42 @@ angular
             }
         });
     }
+    $scope.emailLogin = function(){
+        var ref = new Firebase('https://squareup-split.firebaseio.com');
+	var user = {
+	    email: $scope.data.email,
+	    password: $scope.data.password
+	};
+	ref.authWithPassword(user,function(err,authData){
+	    if (err){
+		var options = {
+		    message: err.code,
+		    buttonlabel: "OK"
+		};
+		supersonic.ui.dialog.alert("Could not log in.",options);
+	    } else {
+		window.localStorage.setItem('userData', JSON.stringify(authData));
+		$scope.moveOn();	
+	    }	    
+	});
+    }
     $scope.signup = function() {
-        supersonic.logger.log("clicked signed up");
-        var Auth = $scope.Auth();
-        Auth.createUser({
-            email: $scope.data.email,
-            password: $scope.data.password,
-        }).then(function(userData) {
-            supersonic.logger.log("made user");
-            $scope.usersRef.child(userData.uid).set({
-                provider: 'password',
-                username: $scope.data.username,
-            });
-            $scope.login();
-        }).catch(function(err) {
-            supersonic.logger.log("error");
-            var options = {
-                message: err,
-                buttonLabel: "Ok"
-            };
-            supersonic.ui.dialog.alert("Failed to Sign Up", options).then(function() {
-                supersonic.logger.log("Alert closed.");
-            });
-        });
-        supersonic.logger.log("done");
+        var ref = new Firebase('https://squareup-split.firebaseio.com');
+	var user = {
+	    email: $scope.data.email,
+	    password: $scope.data.password
+	};
+	ref.createUser(user,function(err,uobj){
+	    if (err){
+		var options = {
+		    message: err.code,
+		    buttonLabel: "OK"
+		};
+		supersonic.ui.dialog.alert("Error creating user",options);
+	    } else {
+		supersonic.ui.dialog.alert("New user created!");
+		supersonic.ui.layers.pop();
+	    }
+	});
     }
 }]);
