@@ -10,7 +10,7 @@
     </super-navbar-title>
     </super-navbar>
 
-    <super-navigate view-id="add-purchase">
+    <super-navigate location="example#purchase">
     <button class="button button-block button-positive icon-left super-plus-round">Add a Purchase</button>
     </super-navigate>
     <div class="list card" ng-repeat="purchase in purchases | orderBy:'-createdAt'" ng-init="purchases=[]"> 
