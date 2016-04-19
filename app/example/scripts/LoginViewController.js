@@ -37,46 +37,97 @@ angular
             if (err) {
                 supersonic.logger.log("login failed! with err" + err);
             } else {
-                $scope.login(authData);
+
+                supersonic.logger.log("authData.uid: " + authData.uid);
+
+                var ref = new Firebase("https://squareup-split.firebaseio.com/profiles/"+ authData.uid);
+                ref.on("value", function(dataSnapshot)
+                       {
+                           if(!dataSnapshot.exists())
+                               {
+                                   supersonic.logger.log("ref didn't exist 1");
+
+                                   var user_data = {
+                                       username: authData.facebook.displayName,
+                                       purchases: null,
+                                       friends: null
+                                   };
+
+                                   $scope.createProfile(authData,user_data);
+
+                               }
+                       });
+
+                       supersonic.logger.log("login - before");
+                       $scope.login(authData);
+                       supersonic.logger.log("login - after");
             }
         });
     }
+
     $scope.emailLogin = function(){
         var ref = new Firebase('https://squareup-split.firebaseio.com');
-	var user = {
-	    email: $scope.data.email,
-	    password: $scope.data.password
-	};
-	ref.authWithPassword(user,function(err,authData){
-	    if (err){
-		var options = {
-		    message: err.code,
-		    buttonlabel: "OK"
-		};
-		supersonic.ui.dialog.alert("Could not log in.",options);
-	    } else {
-		window.localStorage.setItem('userData', JSON.stringify(authData));
-		$scope.moveOn();	
-	    }	    
-	});
+        var user = {
+            email: $scope.data.email,
+            password: $scope.data.password
+        };
+        ref.authWithPassword(user,function(err,authData){
+            if (err){
+                var options = {
+                    message: err.code,
+                    buttonlabel: "OK"
+                };
+                supersonic.ui.dialog.alert("Could not log in.",options);
+            } else {
+                window.localStorage.setItem('userData', JSON.stringify(authData));
+                $scope.moveOn();	
+            }	    
+        });
     }
+
+    $scope.createProfile = function(authData, user_data) {
+
+        var ref = new Firebase("https://squareup-split.firebaseio.com/profiles/"+ authData.uid);
+
+        supersonic.logger.log("authData.uid: " + authData.uid);
+
+        supersonic.logger.log("user_data.email: " + user_data.email);
+        ref.set(user_data);
+        supersonic.logger.log("after ref.set()");
+
+    };
+
     $scope.signup = function() {
         var ref = new Firebase('https://squareup-split.firebaseio.com');
-	var user = {
-	    email: $scope.data.email,
-	    password: $scope.data.password
-	};
-	ref.createUser(user,function(err,uobj){
-	    if (err){
-		var options = {
-		    message: err.code,
-		    buttonLabel: "OK"
-		};
-		supersonic.ui.dialog.alert("Error creating user",options);
-	    } else {
-		supersonic.ui.dialog.alert("New user created!");
-		supersonic.ui.layers.pop();
-	    }
-	});
+        supersonic.logger.log("signup here");
+        var user = {
+            email: $scope.data.email,
+            password: $scope.data.password
+        };
+
+        ref.createUser(user,function(err,authData){
+
+            if (err){
+                var options = {
+                    message: err.code,
+                    buttonLabel: "OK"
+                };
+                supersonic.ui.dialog.alert("Error creating user",options);
+            } else {
+
+                supersonic.ui.dialog.alert("New user created!");
+
+                var user_data = {
+                    username: $scope.data.username,
+                    email: $scope.data.email,
+                    purchases: null,
+                    friends: null
+                };
+
+                $scope.createProfile(authData, user_data);
+
+                supersonic.ui.layers.pop();
+            }
+        });
     }
 }]);
