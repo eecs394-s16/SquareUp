@@ -27,14 +27,20 @@
         </label>
 
     </div>
-    <div class="list list-people"> <!-- List of people to split this bill with -->
+    <div class="list list-people" ng-repeat="person in people track by $index"> <!-- List of people to split this bill with -->
+      
+      <label class="item item-input">
+	<span class="input-label">Share with:</span>
+	<input type="text" placeholder="Who are you sharing it with?" ng-model="person.personName">
+      </label>
+
     </div>
 
-    <!--
+    
     <button class="button button-full button-positive addPerson" ng-click="addPerson()">
         Add a Person to Split this with
     </button>
-    -->
+    
 
     <button class="button button-full button-balanced addPerson" ng-click="squareUp()">
         SquareUp!
