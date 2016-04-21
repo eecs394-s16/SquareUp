@@ -3,7 +3,7 @@ angular
     .controller('SettingsController', ['$scope', 'supersonic', function($scope, supersonic) {
 	//$scope.navbarTitle = "Settings";
 	var changeBalance = function(splitter,purchase,sign){
-	    var change = sign * Number(purchase["price"]) / Number(purchase["numPpl"]);
+	    var change = sign * Number(purchase["price"]) / Number(purchase["splitAmong"]);
 	    if (splitter in $scope.balances){
 		$scope.balances[splitter] += change;
 	    }
@@ -14,7 +14,7 @@ angular
 	var addCredits = function(snapshot, prevKey){
 	    supersonic.logger.log("addCredits called.");
 	    var purchase = snapshot.val();
-	    for (var splitter in purchase["splitWith"]){
+	    for (var splitter in purchase["people"]){
 		changeBalance(splitter,purchase,1);
 		supersonic.logger.log($scope.balances[splitter]);
 		supersonic.logger.log(splitter);
@@ -39,10 +39,19 @@ angular
 	    supersonic.logger.log("Summary refresh called.");
 	    $scope.balances = {};
 	    $scope.positives = {};
-            $scope.userData = JSON.parse(window.localStorage.getItem('userData'));
+        $scope.userData = JSON.parse(window.localStorage.getItem('userData'));
+
+        var ProfileRef = new Firebase('https://squareup-split.firebaseio.com/profiles/'+$scope.userData.uid);
+        var name = "";
+
+        ProfileRef.on("value", function(dataSnapshot){
+        	name = dataSnapshot.child("username").val();
+        	supersonic.logger.log("name: "+ name);     
+        };
+
 	    //TODO: eliminate hardcoding chris3 here
 	    var creditRef = new Firebase('https://squareup-split.firebaseio.com/purchases');
-	    creditRef.orderByChild("buyer").equalTo($scope.userData.uid).on("child_added",addCredits);
+	    creditRef.orderByChild("owner").equalTo(name).on("child_added",addCredits);
 
 	    var debtRef = new Firebase('https://squareup-split.firebaseio.com/profiles/'+$scope.userData.uid+'/partyToPurchase');
 	    debtRef.on("value",function(purchases){ purchases.forEach(addDebts); } );
