@@ -75,19 +75,21 @@ angular
             };
 	    var PurchasesRef = new Firebase('https://squareup-split.firebaseio.com/purchases');
 	    var newPurchaseRef = PurchasesRef.push(purchase);
-	    var purchaseKey = newPurchaseRef.key();
-	    supersonic.logger.log(purchaseKey);
+	    $scope.purchaseKey = newPurchaseRef.key();
+	    supersonic.logger.log($scope.purchaseKey);
 	    var personRef = new Firebase('https://squareup-split.firebaseio.com/profiles');
 	    $scope.purchasesAdded = 0;
 	    $scope.people.forEach(function(person){
 		supersonic.logger.log("Updating purchase index for: " + person.personName);
-		personRef.orderByChild('username').equalTo(person.personName).on('value',addPurchaseToIndex);
+		personRef.orderByChild('username').equalTo(person.personName).on('child_added',addPurchaseToIndex);
 	    });
 
 	};
 	var addPurchaseToIndex = function(dataSnapshot){
-	    var profile = dataSnapshot.ref();
-	    profile.child('purchasesOwed').update({purchaseKey: 'true'});
+	    var profilePath = dataSnapshot.ref().toString();
+	    var profileRef = new Firebase(profilePath+"/purchasesOwed/"+$scope.purchaseKey);
+	    profileRef.set('true');
+	    supersonic.logger.log("added purchase to index for user" + profilePath);
 	    $scope.purchasesAdded++;
 	    if ($scope.purchasesAdded === $scope.people.length){
 		leavePage();
