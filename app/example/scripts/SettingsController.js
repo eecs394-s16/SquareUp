@@ -47,7 +47,7 @@ angular
         ProfileRef.on("value", function(dataSnapshot){
         	name = dataSnapshot.child("username").val();
         	supersonic.logger.log("name: "+ name);     
-        };
+        });
 
 	    //TODO: eliminate hardcoding chris3 here
 	    var creditRef = new Firebase('https://squareup-split.firebaseio.com/purchases');
