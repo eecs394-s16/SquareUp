@@ -13,6 +13,8 @@ angular
 			$scope.balances[splitter] = change;
 		}
 		supersonic.logger.log("The length is :" + $scope.balances.length);
+
+		//$scope.$apply();
 	};
 	var addCredits = function(snapshot, prevKey){
 		supersonic.logger.log("addCredits called.");
@@ -31,9 +33,9 @@ angular
 		PurchaseRef.on("value",function(snapshot){
 			supersonic.logger.log("This happens at least once");
 			var purchase = snapshot.val();
-			changeBalance(purchase["buyer"],purchase,-1);
-			supersonic.logger.log($scope.balances[purchase["buyer"]]);
-			supersonic.logger.log(purchase["buyer"]);
+			changeBalance(purchase["owner"],purchase,-1);
+			supersonic.logger.log($scope.balances[purchase["owner"]]);
+			supersonic.logger.log(purchase["owner"]);
 
 		});
 
@@ -57,7 +59,8 @@ angular
 			var creditRef = new Firebase('https://squareup-split.firebaseio.com/purchases');
 			creditRef.orderByChild("owner").equalTo(name).on("child_added",addCredits);
 
-			var debtRef = new Firebase('https://squareup-split.firebaseio.com/profiles/'+$scope.userData.uid+'/partyToPurchase');
+			var debtRef = new Firebase('https://squareup-split.firebaseio.com/profiles/'+$scope.userData.uid+'/purchasesOwed');
+			supersonic.logger.log("The USER ID IS:"+$scope.userData.uid);
 			debtRef.on("value",function(purchases){ purchases.forEach(addDebts); } );
 			$scope.$apply();   
 		});
