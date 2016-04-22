@@ -5,20 +5,22 @@ angular
 	
 	var changeBalance = function(splitter,purchase,sign){
 		var change = sign * Number(purchase["price"]) / Number(purchase["splitAmong"]);
+		supersonic.logger.log("The change is :" + change);
 		if (splitter in $scope.balances){
 			$scope.balances[splitter] += change;
 		}
 		else {
 			$scope.balances[splitter] = change;
 		}
+		supersonic.logger.log("The length is :" + $scope.balances.length);
 	};
 	var addCredits = function(snapshot, prevKey){
 		supersonic.logger.log("addCredits called.");
 		var purchase = snapshot.val();
 		for (var splitter in purchase["people"]){
 			changeBalance(splitter,purchase,1);
-			supersonic.logger.log($scope.balances[splitter]);
-			supersonic.logger.log(splitter);
+			//supersonic.logger.log($scope.balances[splitter]);
+			//supersonic.logger.log(splitter);
 		}
 	};
 	var addDebts = function(purchID){
@@ -62,7 +64,7 @@ angular
 	};
 	
 	supersonic.logger.log("before doRefresh()");  
-	$scope.doRefresh();
+	//$scope.doRefresh();
 	supersonic.logger.log("after doRefresh()");  
 
 }]);
