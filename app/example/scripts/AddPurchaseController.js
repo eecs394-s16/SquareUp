@@ -129,4 +129,10 @@ angular
              */
   };
 
+  $scope.removePerson = function(){
+       $scope.people.pop();
+       supersonic.logger.log("The number of people is :" + $scope.people.length);
+               //$scope.$apply();
+  };
+
     }]);
