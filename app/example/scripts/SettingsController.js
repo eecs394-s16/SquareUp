@@ -2,7 +2,7 @@ angular
 .module('example')
 .controller('SettingsController', ['$scope', 'supersonic', function($scope, supersonic) {
 	//$scope.navbarTitle = "Settings";
-	
+
 	var changeBalance = function(splitter,purchase,sign){
 		var change = sign * Number(purchase["price"]) / Number(purchase["splitAmong"]);
 		supersonic.logger.log("The change is :" + change);
@@ -51,9 +51,7 @@ angular
 
 		ProfileRef.on("value", function(dataSnapshot){
 			name = dataSnapshot.child("username").val();
-			supersonic.logger.log("name: "+ name); 
-
-			//TODO: eliminate hardcoding chris3 here
+			supersonic.logger.log("name: "+ name);
 			supersonic.logger.log("name queried: "+ name);
 
 			var creditRef = new Firebase('https://squareup-split.firebaseio.com/purchases');
@@ -62,12 +60,12 @@ angular
 			var debtRef = new Firebase('https://squareup-split.firebaseio.com/profiles/'+$scope.userData.uid+'/purchasesOwed');
 			supersonic.logger.log("The USER ID IS:"+$scope.userData.uid);
 			debtRef.on("value",function(purchases){ purchases.forEach(addDebts); } );
-			$scope.$apply();   
+			$scope.$apply();
 		});
 	};
-	
-	supersonic.logger.log("before doRefresh()");  
+
+	supersonic.logger.log("before doRefresh()");
 	//$scope.doRefresh();
-	supersonic.logger.log("after doRefresh()");  
+	supersonic.logger.log("after doRefresh()");
 
 }]);
