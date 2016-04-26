@@ -4,8 +4,10 @@
  ***********************************************************/
 
 navigation-bar {
-  background-color: #00B5FF;
-  color: #ffffff;
+  background-color: #00cc5d;
+  background: #006fcc;
+  color: #000000;
+  border-radius: 15px;
 }
 
 navigation-bar title {
@@ -20,6 +22,7 @@ navigation-bar button, navigation-bar back-bar-button {
 }
 
 tab-bar {
+  border-radius: 15px;
   background-color: #ffffff;
   border-top: 1px #d8d8d8 solid;
 }
@@ -44,4 +47,12 @@ tab-bar-item#index {
 
 tab-bar-item#profile {
   background-image: url(icons/profile.svg);
+}
+
+button {
+    border-radius: 15px;
+}
+
+div .card.item {
+    border-radius: 15px;
 }
