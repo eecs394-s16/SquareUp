@@ -55,6 +55,7 @@ angular
 			supersonic.logger.log("name queried: "+ name);
 
 			var creditRef = new Firebase('https://squareup-split.firebaseio.com/purchases');
+			//for each purchase that this user bought, add credits to each splitter
 			creditRef.orderByChild("owner").equalTo(name).on("child_added",addCredits);
 
 			var debtRef = new Firebase('https://squareup-split.firebaseio.com/profiles/'+$scope.userData.uid+'/purchasesOwed');
