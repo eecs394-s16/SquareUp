@@ -23,18 +23,18 @@ navigation-bar button, navigation-bar back-bar-button {
 
 tab-bar {
   border-radius: 15px;
-  background-color: #ffffff;
+  background-color: #00cc5d;
   border-top: 1px #d8d8d8 solid;
 }
 
 tab-bar tab-bar-item {
   color: #b0b1b4;
   font-family: "Avenir";
-  font-size: 10px;
+  font-size: 12px;
 }
 
 tab-bar tab-bar-item:selected {
-  color: #1596f7;
+  color: #ffffff;
 }
 
 tab-bar-item#settings {
