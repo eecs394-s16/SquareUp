@@ -19,6 +19,7 @@ angular
 	var addCredits = function(snapshot, prevKey){
 		supersonic.logger.log("addCredits called.");
 		var purchase = snapshot.val();
+	    supersonic.logger.log(purchase['itemName']);
 		for (var splitter in purchase["people"]){
 			changeBalance(splitter,purchase,1);
 			//supersonic.logger.log($scope.balances[splitter]);
@@ -56,7 +57,25 @@ angular
 
 			var creditRef = new Firebase('https://squareup-split.firebaseio.com/purchases');
 			//for each purchase that this user bought, add credits to each splitter
-			creditRef.orderByChild("owner").equalTo(name).once("child_added",addCredits);
+            // 042716 james: I don't think this is working..
+            // This doesn't add more than one purchase info
+			//creditRef.orderByChild("owner").equalTo(name).once("child_added",addCredits);
+            //
+            creditRef.once('value', function(snapshot) {
+                var data = snapshot.val();
+                for (var purchaseID in data) {
+                    if (data.hasOwnProperty(purchaseID)) {
+                        var purchase = data[purchaseID];
+                        supersonic.logger.log('purchase:' + purchase);
+                        supersonic.logger.log('purchase.owner:' + purchase.owner);
+                        if (purchase.owner == name) {
+                            for (var splitter in purchase.people) {
+                                changeBalance(splitter, purchase, 1);
+                            }
+                        }
+                    }
+                }
+            });
 
 			var debtRef = new Firebase('https://squareup-split.firebaseio.com/profiles/'+$scope.userData.uid+'/purchasesOwed');
 			supersonic.logger.log("The USER ID IS:"+$scope.userData.uid);
