@@ -85,7 +85,7 @@ angular
 
 	    $scope.people.forEach(function(person){
 		      supersonic.logger.log("Updating purchase index for: " + person.personName);
-		      personRef.orderByChild('username').equalTo(person.personName).on('child_added',addPurchaseToIndex);
+		      personRef.orderByChild('username').equalTo(person.personName).once('child_added',addPurchaseToIndex);
 	    });
 
 	};
