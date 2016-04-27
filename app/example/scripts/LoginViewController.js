@@ -88,13 +88,10 @@ angular
     $scope.createProfile = function(authData, user_data) {
 
         var ref = new Firebase("https://squareup-split.firebaseio.com/profiles/"+ authData.uid);
+        var name2id = new Firebase("https://squareup-split.firebaseio.com/name2id/"+user_data.username);
 
-        supersonic.logger.log("authData.uid: " + authData.uid);
-
-        supersonic.logger.log("user_data.email: " + user_data.email);
+        name2id.set(authData.uid);
         ref.set(user_data);
-        supersonic.logger.log("after ref.set()");
-
     };
 
     $scope.signup = function() {
