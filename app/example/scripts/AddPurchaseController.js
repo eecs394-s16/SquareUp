@@ -54,7 +54,7 @@ angular
           // TODO: Sanity check for input fields to make sure every field is filled in.
           $scope.userData = JSON.parse(window.localStorage.getItem('userData'));
           var ProfileRef = new Firebase('https://squareup-split.firebaseio.com/profiles/'+$scope.userData.uid);
-          ProfileRef.on("value", addPurchase);
+          ProfileRef.once("value", addPurchase);
 	    }
 	}
 
