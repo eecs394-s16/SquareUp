@@ -26,12 +26,12 @@ module.exports =
 
   preloads: [
     {
-      id: "learn-more"
-      location: "example#learn-more"
+      id: "index"
+      location: "example#getting-started"
     }
     {
-      id: "using-the-scanner"
-      location: "example#using-the-scanner"
+      id: "settings"
+      location: "example#settings"
     }
     {
         id: "add-purchase"
