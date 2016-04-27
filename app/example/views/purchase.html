@@ -9,12 +9,6 @@
 		 <input type="text" placeholder="How much was it?" ng-model="data.price">
 		</span>
         </label>
-
-        <label class="item item-input">
-            <span class="input-label"># People</span>
-            <input type="text" placeholder="How many people are you sharing it with?" ng-model="data.numPeople">
-        </label>
-
     </div>
     <div class="list list-people" ng-repeat="person in people track by $index"> <!-- List of people to split this bill with -->
       
