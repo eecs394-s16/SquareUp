@@ -68,9 +68,9 @@ angular
                 owner: usernameSnapshot.child("username").val(),
                 itemName: $scope.data.itemName,
                 price: $scope.data.price,
-                splitAmong: $scope.people.length,
+                splitAmong: $scope.people.length+1, // i'm included in the bill
                 numPaid: 0,
-                numNotPaid: $scope.people.length,
+                numNotPaid: $scope.people.length+1,
                 people: ppl
                 // TODO: need a way to see how many people purchased this by counting the number of item-select class div
       };
