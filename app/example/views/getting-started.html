@@ -16,10 +16,10 @@
     <div class="list card" ng-repeat="purchase in purchases | orderBy:'-createdAt'" ng-init="purchases=[]"> 
         <!-- order by createdAt so the newest purchase comes first -->
             <div class="item item-divider row">
-                <div class="col-50"><b>{{purchase.ownerID}}</b></div>
+                <div class="col-50"><b>{{purchase.owner}}</b></div>
                 <div class="col-25 right-align">
 		    unpaid:
-                    <span class="positive"> &nbsp; {{purchase.splitAmong}} &nbsp; </span>
+                    <span class="positive"> &nbsp; {{purchase.numNotPaid}} &nbsp; </span>
                 </div>
                 <div class="col-25 right-align">
 	             paid:
