@@ -4,7 +4,7 @@ angular
 	//$scope.navbarTitle = "Settings";
 
 	var changeBalance = function(splitter,purchase,sign){
-		var change = sign * Number(purchase["price"]) / Number(purchase["splitAmong"]);
+		var change = sign * Math.round(Number(purchase["price"]) / Number(purchase["splitAmong"]));
 		supersonic.logger.log("The change is :" + change);
 		if (splitter in $scope.balances){
 			$scope.balances[splitter] += change;
