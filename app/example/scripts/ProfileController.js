@@ -16,7 +16,7 @@ angular
         $scope.doRefresh();
         $scope.$apply();
         // Gonna call it once -- prob need to move it out to ng-init
-        $scope.Friends = ["James", "Connor", "Dan"];
+        $scope.Friends = ["Gates Porter", "Connor", "Danqi  Liao"];
         $scope.placeholder = "Add a new friend";
 
         $scope.addFriend = function(){
@@ -24,8 +24,9 @@ angular
           supersonic.logger.log("DONE ADDING FRIENDS!:");
           supersonic.logger.log($scope.friendName);
           $scope.friendName = "";
+          window.localStorage.setItem('friendCircle', JSON.stringify($scope.Friends));
         };
 
-        window.localStorage.setItem('friendCircle', JSON.stringify($scope.Friends));
+        //window.localStorage.setItem('friendCircle', JSON.stringify($scope.Friends));
 
     }]);
