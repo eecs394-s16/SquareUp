@@ -16,32 +16,13 @@
       <img src="/icons/people.png" height="30px" width="30px">
     </div>
 
-    <div class="list">
-
-    <a class="item item-thumbnail-left" href="#">
-      <img src="/James.png">
-      <h2>James</h2>
-    </a>
-    <a class="item item-thumbnail-left" href="#">
-      <img src="/Connor.png">
-      <h2>Connor</h2>
-    </a>
-    <a class="item item-thumbnail-left" href="#">
-      <img src="/Me.png">
-      <h2>Jason</h2>
-    </a>
-    </div>
-
-    <div ng-repeat="friend in newFriends">
+    <div ng-repeat="friend in Friends">
       <a class="item item-thumbnail-left" href="#">
-        <img src="/Me.png">
+        <img src="/{{friend}}.png">
         <h2>{{friend}}</h2>
       </a>
     </div>
     <div class="list">
-
-    <div>
-    </div>
 
     <div class="item item-button-right">
       <input type="text" placeholder="Add a new Friend" ng-model="friendName">

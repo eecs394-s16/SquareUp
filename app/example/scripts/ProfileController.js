@@ -16,14 +16,16 @@ angular
         $scope.doRefresh();
         $scope.$apply();
         // Gonna call it once -- prob need to move it out to ng-init
-        $scope.newFriends = [];
+        $scope.Friends = ["James", "Connor", "Dan"];
         $scope.placeholder = "Add a new friend";
 
         $scope.addFriend = function(){
-          $scope.newFriends.push($scope.friendName);
+          $scope.Friends.push($scope.friendName);
           supersonic.logger.log("DONE ADDING FRIENDS!:");
           supersonic.logger.log($scope.friendName);
           $scope.friendName = "";
         };
+
+        window.localStorage.setItem('friendCircle', JSON.stringify($scope.Friends));
 
     }]);

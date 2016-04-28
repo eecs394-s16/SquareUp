@@ -96,8 +96,13 @@ angular
 	    profileRef.set('true');
 	    supersonic.logger.log("added purchase to index for user" + profilePath);
 	    $scope.purchasesAdded++;
+      supersonic.logger.log("THE NUMBER OF PEOPLE IS:");
+      supersonic.logger.log($scope.people.length);
+      supersonic.logger.log($scope.purchasesAdded);
 
 	    if ($scope.purchasesAdded === $scope.people.length){
+          supersonic.logger.log("ABOUT TO LEAVE PAGE");
+
 		      leavePage();
 	    }
 	};
@@ -115,6 +120,8 @@ angular
 	};
 
 	$scope.addPerson = function() {
+      supersonic.logger.log("Your friends list is");
+      supersonic.logger.log($scope.myFriends);
 	    $scope.people.push({personName:""});
 	    $scope.people.foreach(function(person){
 		      supersonic.logger.log(person.personName);
@@ -123,10 +130,7 @@ angular
 	    supersonic.logger.log($scope.people.length);
 
 	    $scope.$apply();
-	    /*
-             var myEl = angular.element( document.querySelector( '.list-people' ) );
-             myEl.append('<label class="item item-input"><span class="input-label">Share With:</span><input type="text" placeholder="Who are you sharing it with?"></label>');
-             */
+
   };
 
   $scope.removePerson = function(){
@@ -134,5 +138,8 @@ angular
        supersonic.logger.log("The number of people is :" + $scope.people.length);
                //$scope.$apply();
   };
+
+  $scope.myFriends = JSON.parse(window.localStorage.getItem('friendCircle'));
+
 
     }]);
