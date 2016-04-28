@@ -8,11 +8,11 @@
 
   <div class="list card" ng-repeat="(user,balance) in balances">
 
-    <a href="#" class="item item-thumbnail-left owes" ng-if="balance>0">
+    <a href="#" class="item item-thumbnail-left item-text-wrap owes" ng-if="balance>0">
       <img src="/{{user}}.png">
       <b>{{user}}</b> owes you <b>${{balance}}</b>
     </a>
-    <a href="#" class="item item-thumbnail-left owed" ng-if="balance<0">
+    <a href="#" class="item item-thumbnail-left item-text-wrap owed" ng-if="balance<0">
       <img src="/{{user}}.png">
       You owe <b>{{user}}</b> <b>${{-1*balance}}</b>
     </a>
