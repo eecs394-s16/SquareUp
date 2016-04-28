@@ -27,6 +27,6 @@ angular
           window.localStorage.setItem('friendCircle', JSON.stringify($scope.Friends));
         };
 
-        //window.localStorage.setItem('friendCircle', JSON.stringify($scope.Friends));
+        window.localStorage.setItem('friendCircle', JSON.stringify($scope.Friends));
 
     }]);
