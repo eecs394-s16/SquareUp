@@ -2,7 +2,7 @@ angular
     .module('example')
     .controller('ProfileViewController', ['$scope', 'supersonic', function($scope, supersonic) {
         // Refreshes the page and grabs new purchase data from firebase
-        $scope.purchases = [];//empty array 
+        $scope.purchases = [];//empty array
         $scope.doRefresh = function() {
             $scope.userData = JSON.parse(window.localStorage.getItem('userData'));
             supersonic.logger.log("Refresh Called.");
@@ -16,4 +16,17 @@ angular
         $scope.doRefresh();
         $scope.$apply();
         // Gonna call it once -- prob need to move it out to ng-init
+        $scope.Friends = ["Gates Porter", "Connor", "Danqi  Liao"];
+        $scope.placeholder = "Add a new friend";
+
+        $scope.addFriend = function(){
+          $scope.Friends.push($scope.friendName);
+          supersonic.logger.log("DONE ADDING FRIENDS!:");
+          supersonic.logger.log($scope.friendName);
+          $scope.friendName = "";
+          window.localStorage.setItem('friendCircle', JSON.stringify($scope.Friends));
+        };
+
+        window.localStorage.setItem('friendCircle', JSON.stringify($scope.Friends));
+
     }]);
